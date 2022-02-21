@@ -6,6 +6,7 @@ Button {
     id: gameButton
     property color rectColor: "red";
     property int rectWidth: 10;
+    property string gameOption: "";
 
     height: gameButtonText.height; // should be according to the text pexel size
     palette { // background color
@@ -16,7 +17,7 @@ Button {
     Text{
         id: gameButtonText
         x:gameButton.indicator.width + 5; // relative to the parent element
-        text: "Play";
+        text: gameOption;
         font.pointSize: 16;
     }
 

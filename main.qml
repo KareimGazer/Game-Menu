@@ -9,8 +9,21 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
+
     GameButton{
+        id:playButton
         x:mainWindow.height / 10; y:mainWindow.height * (4/5);
+        gameOption: "Play";
+    }
+    GameButton{
+        id:settingsButton
+        x:mainWindow.height / 10; y:playButton.y + playButton.height;
+        gameOption: "Settings";
+    }
+    GameButton{
+        id:quitButton
+        x:mainWindow.height / 10; y:settingsButton.y + settingsButton.height;
+        gameOption: "Quit";
     }
 
 }
