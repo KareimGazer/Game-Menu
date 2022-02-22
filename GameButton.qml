@@ -2,8 +2,13 @@ import QtQuick 2.0
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
+/*
+ * GameButton Component
+ *
+ */
 Button {
     id: gameButton
+    height: gameButtonText.height;
     property color rectColor: "red";
     property int rectWidth: 10;
     property string gameOption: "";
@@ -16,6 +21,7 @@ Button {
         id: gameButtonText
         x:gameButton.indicator.width + 5;
         text: gameOption;
+        font.pixelSize: 16;
     }
 
     indicator: Rectangle{
@@ -26,46 +32,27 @@ Button {
     }
 
     states: [
-        State {
-            name: "Normal"
-            when: !gameButton.pressed && !gameButton.hovered
-            // when: gameButton.hoverEnabled // stuck at normal!!
-            PropertyChanges {
-                target: gameButton;
-                rectColor: "red";
-                rectWidth: 10;
-                height: gameButtonText.height;
-            }
-            PropertyChanges {
-                target: gameButtonText;
-                font.pixelSize: 16;
-            }
-        },
+        // clicked state
         State {
             name: "Clicked"
             when: gameButton.pressed
-            extend: "Normal"
+            extend: ""
             PropertyChanges {
                 target: gameButton;
                 rectColor: "green";
                 rectWidth: 30;
             }
         },
+        // hovered state
         State {
             name: "Hovered"
             when: gameButton.hovered
-            extend: "Normal"
+            extend: ""
             PropertyChanges {
                 target: gameButton;
                 rectWidth: 25;
             }
         }
     ]
-
-    state: "Normal";
-
-    onStateChanged: {
-        console.log("State: " + state);
-    }
 }
 
