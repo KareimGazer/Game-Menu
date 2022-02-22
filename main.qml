@@ -9,21 +9,14 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
 
-
-    GameButton{
-        id:playButton
+    Column {
         x:mainWindow.width / 10; y:mainWindow.height * (3/4);
-        gameOption: "Play";
-    }
-    GameButton{
-        id:settingsButton
-        x:mainWindow.width / 10; y:playButton.y + playButton.height;
-        gameOption: "Settings";
-    }
-    GameButton{
-        id:quitButton
-        x:mainWindow.width / 10; y:settingsButton.y + settingsButton.height;
-        gameOption: "Quit";
+        Repeater {
+            model: ["Play", "Settings", "Quit"]
+            GameButton{
+                gameOption: modelData;
+            }
+        }
     }
 
 }

@@ -8,17 +8,14 @@ Button {
     property int rectWidth: 10;
     property string gameOption: "";
 
-    // height: gameButtonText.height; // should be according to the text pexel size
     palette { // background color
         button: "white"
     }
-    // flat: true
 
     Text{
         id: gameButtonText
-        x:gameButton.indicator.width + 5; // relative to the parent element
+        x:gameButton.indicator.width + 5;
         text: gameOption;
-        // font.pixelSize: 16; // leads to very small text, pointSize was larger
     }
 
     indicator: Rectangle{
@@ -32,6 +29,7 @@ Button {
         State {
             name: "Normal"
             when: !gameButton.pressed && !gameButton.hovered
+            // when: gameButton.hoverEnabled // stuck at normal!!
             PropertyChanges {
                 target: gameButton;
                 rectColor: "red";
