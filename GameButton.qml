@@ -8,7 +8,7 @@ Button {
     property int rectWidth: 10;
     property string gameOption: "";
 
-    height: gameButtonText.height; // should be according to the text pexel size
+    // height: gameButtonText.height; // should be according to the text pexel size
     palette { // background color
         button: "white"
     }
@@ -18,7 +18,7 @@ Button {
         id: gameButtonText
         x:gameButton.indicator.width + 5; // relative to the parent element
         text: gameOption;
-        font.pointSize: 16;
+        // font.pixelSize: 16; // leads to very small text, pointSize was larger
     }
 
     indicator: Rectangle{
@@ -30,8 +30,23 @@ Button {
 
     states: [
         State {
-            name: "PRESSED"
+            name: "Normal"
+            when: !gameButton.pressed && !gameButton.hovered
+            PropertyChanges {
+                target: gameButton;
+                rectColor: "red";
+                rectWidth: 10;
+                height: gameButtonText.height;
+            }
+            PropertyChanges {
+                target: gameButtonText;
+                font.pixelSize: 16;
+            }
+        },
+        State {
+            name: "Clicked"
             when: gameButton.pressed
+            extend: "Normal"
             PropertyChanges {
                 target: gameButton;
                 rectColor: "green";
@@ -39,24 +54,17 @@ Button {
             }
         },
         State {
-            name: "NOTPRESSED"
-            when: !gameButton.pressed
-            PropertyChanges {
-                target: gameButton;
-                rectColor: "red";
-                rectWidth: 10;
-            }
-        },
-        State {
             name: "Hovered"
-            when: gameButton.hover
+            when: gameButton.hovered
+            extend: "Normal"
             PropertyChanges {
                 target: gameButton;
-                rectColor: "red";
                 rectWidth: 25;
             }
         }
     ]
+
+    state: "Normal";
 
     onStateChanged: {
         console.log("State: " + state);
