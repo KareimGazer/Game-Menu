@@ -5,5 +5,4 @@ Sample game menu
 QT creator
 
 ## Demo
-Youtube: 
-
+Youtube: https://youtu.be/TdGiBXQVT2I
